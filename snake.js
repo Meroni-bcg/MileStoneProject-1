@@ -14,13 +14,9 @@ var snake;
 
 let width = 10;
 let height = 10;
-
-// how to track score    score = document.getElementById("score");
 let score = 0;
 
-//write a function that listens (eventListener) for clicks. Specifically when someone clicks "StartGame"
 
-//window onload
 window.addEventListener("load", () => {
     setUpPage(() => startGame());
 
@@ -39,6 +35,10 @@ class Snake {
         this.height = 80;
     }
 
+    image = HTMLElement;
+
+  
+
     sayHi() {
         alert(this.name);
     }
@@ -49,10 +49,12 @@ class Snake {
     updateCoords(newX, newY) {
         this.positionX = newX;
         this.positionY = newY;
+        this.image.style.left = newX+"px";
+        this.image.style.bottom = newY+"px";
     }
 }
 
-// Usage:
+// Usage: 
 
 
 function between(x, y) {
@@ -73,6 +75,8 @@ class Mouse {
         this.height = 50;
     }
 
+    image = HTMLElement;
+
     sayHi() {
         alert(this.name);
     }
@@ -83,6 +87,8 @@ class Mouse {
     updateCoords(newX, newY) {
         this.positionX = newX;
         this.positionY = newY;
+        this.image.style.left = newX+"px";
+        this.image.style.bottom = newY+"px";
     }
 
 
@@ -98,6 +104,8 @@ class Poison {
         this.height = 70;
     }
 
+    image = HTMLElement;
+
     sayHi() {
         alert(this.name);
     }
@@ -109,6 +117,8 @@ class Poison {
     updateCoords(newX, newY) {
         this.positionX = newX;
         this.positionY = newY;
+        this.image.style.left = newX+"px";
+        this.image.style.bottom = newY+"px";
     }
 
 }
@@ -133,12 +143,16 @@ function setUpPage() {
     mouseTwo = new Mouse("Fresco", between(0, 550), between(0, 550), "dist/mouse-brown.png");
     poison = new Poison("GameOver", between(0, 600), between(0, 600), "dist/snakepoison.png");
     snake = new Snake("SuperLarky", between(0, 550), between(0, 550), "dist/snakegame.png");
+     mouse.image = newImage(mouse.url, mouse.positionX, mouse.positionY);
+    // newImage(mouseTwo.url, mouseTwo.positionX, mouseTwo.positionY);
+    snake.image = newImage(snake.url, snake.positionX, snake.positionY);
+    poison.image = newImage(poison.url, poison.positionX, poison.positionY);
     mainLoop();
 
 }
 
 function startGame() {
-
+//render
 }
 
 //collision detection btwn point and rectangle
@@ -166,16 +180,14 @@ function mainLoop() {
     // input
 
     //update
+    //update
     mouse.updateCoords(between(100, 550), between(0, 550));
-    mouseTwo.updateCoords(between(100, 550), between(0, 550));
+    //mouseTwo.updateCoords(between(100, 550), between(0, 550));
     poison.updateCoords(between(100, 550), between(0, 550));
     snake.updateCoords(between(100, 550), between(0, 550));
 
-    //render
-    newImage(mouse.url, mouse.positionX, mouse.positionY);
-    // newImage(mouseTwo.url, mouseTwo.positionX, mouseTwo.positionY);
-    newImage(snake.url, snake.positionX, snake.positionY);
-    newImage(poison.url, poison.positionX, poison.positionY);
+    
+    
 
     if (collisionDetection(mouse, snake)) {
         score += 1;
